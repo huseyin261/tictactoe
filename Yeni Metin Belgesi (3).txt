@@ -1,0 +1,52 @@
+void _makeMove(int row, int col){
+    if (_board[row][col] != "" || _gameOver) {
+      return;
+    }
+    setState((){
+      _board[row][col] = _currentPlayer;
+
+      if(_board[row][0] == _currentPlayer  &&
+          _board[row][1] == _currentPlayer &&
+          _board[row][2] == _currentPlayer){
+        _winner = _currentPlayer;
+        _gameOver = true;
+      }else if(
+      _board[0][col] == _currentPlayer &&
+      _board[1][col] == _currentPlayer &&
+      _board[2][col] == _currentPlayer) {
+        _winner = _currentPlayer;
+        _gameOver = true;
+      }
+      else if(
+      _board[0][0] == _currentPlayer &&
+          _board[1][1] == _currentPlayer &&
+          _board[2][2] == _currentPlayer) {
+        _winner = _currentPlayer;
+        _gameOver = true;
+      }
+      else if(
+          _board[0][2] == _currentPlayer &&
+          _board[1][1] == _currentPlayer &&
+          _board[2][0] == _currentPlayer) {
+        _winner = _currentPlayer;
+        _gameOver = true;
+      }
+      else if(!_board.any((element) => element.any((element) => element == "" ))){
+        _gameOver = true;
+        _winner = "It is tie";
+
+      }
+      _currentPlayer = _currentPlayer == "X" ? "O" : "X";
+
+
+
+
+
+
+
+class _GameScreenState extends State<GameScreen> {
+
+  List<List<String>> _board;
+  String _currentPlayer;
+  String _winner;
+  bool _gameOver;
